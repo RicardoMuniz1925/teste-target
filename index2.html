@@ -1,0 +1,47 @@
+<h2>Verificar se um número pertence à sequência de Fibonacci</h2>
+<p>Escreva um número para verificar se ele pertence à sequência de Fibonacci:</p>
+<form>
+	<label for="num">Número:</label>
+	<input type="number" id="num" name="num">
+	<input type="submit" value="Verificar">
+</form>
+
+<p id="result"></p>
+
+<script>
+	function verificaFibonacci() {
+		// Pega o valor do campo de entrada
+		let num = parseInt(document.getElementById("num").value);
+
+		// Inicia as variáveis para os dois primeiros valores da sequência
+		let fib1 = 0;
+		let fib2 = 1;
+
+		// Inicia a variável para a posição atual na sequência
+		let pos = 0;
+
+		// Percorre a sequência até encontrar um valor maior ou igual ao número informado
+		while (fib2 < num) {
+			// Atualiza os valores da sequência
+			let temp = fib2;
+			fib2 = fib1 + fib2;
+			fib1 = temp;
+
+			// Atualiza a posição atual
+			pos++;
+		}
+
+		// Verifica se o número informado está na sequência
+		if (fib2 == num) {
+			document.getElementById("result").innerHTML = "O número " + num + " está na posição " + (pos+3) + " da sequência de Fibonacci.";
+		} else {
+			document.getElementById("result").innerHTML = "O número " + num + " não está na sequência de Fibonacci.";
+		}
+	}
+
+	// Adiciona um ouvinte de eventos para o formulário
+	document.querySelector('form').addEventListener('submit', (event) => {
+		event.preventDefault(); // Previne que a página recarregue
+		verificaFibonacci(); // Chama a função para verificar se o número pertence à sequência
+	});
+</script>
